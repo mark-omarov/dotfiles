@@ -1,5 +1,15 @@
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [user]
-	name = Mark Omarov
-	email = 15357910+mark-omarov@users.noreply.github.com
+  name = Mark Omarov
+  email = 15357910+mark-omarov@users.noreply.github.com
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  pushf = push --force-with-lease
+  addall = add -A
+  ff = pull --ff-only
+  prb = pull --rebase origin
+  rb = rebase origin
+  st = status -sb
+[push]
+  default = current
