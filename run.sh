@@ -8,5 +8,6 @@ stowit() {
 }
 
 stowit zsh
+stowit git
 
 git reset --hard

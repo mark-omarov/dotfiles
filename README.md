@@ -10,7 +10,6 @@ You can use any method to apply the configuration changes, but I use a script to
 - git
 - stow
 
-
 ## Applying the configuration changes
 
 This setup is designed to be executed by an ansible playbook, but you can also run the script manually.
