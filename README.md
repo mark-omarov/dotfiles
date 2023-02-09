@@ -5,7 +5,9 @@
 This is meant to be a backup of my configurations.
 I use [stow][stow] to manage the symlinks, and a little hack to avoid issues with existing files. Be aware that the script to automatically apply configuration changes is destructive, and will essentially replace any existing files with symlinks.
 
-The only exception is the `fonts` - as macOS does not support symlinks in the `~/Library/Fonts` directory. The script will place fonts in the directory (doesn't override existing files) automatically. If you don't use the script - you can manually place the fonts in the directory.
+There are a few exceptions:
+- `fonts` - macOS does not support symlinks in the `~/Library/Fonts` directory. The script will hard link files to that directory (doesn't override existing if present). If you don't use the script - you can manually place the fonts in the directory.
+- `ssh` - it contains my **encrypted** private key, you don't have the key to decrypt the file, you will have to replace the file with your own. Don't forget to replace the public key as well. And if you were to use this repository - **don't forget to encrypt your private key** before pushing it to the repository.
 
 ## Prerequisites
 You can use any method to apply the configuration changes, but I use a script to automate the process. The script is written in bash, and requires the following packages to be installed:
