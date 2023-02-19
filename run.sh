@@ -18,6 +18,7 @@ moveFonts() {
 stowit zsh
 stowit git
 stowit ssh
+stowit config
 
 moveFonts base
 
