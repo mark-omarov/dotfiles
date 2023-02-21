@@ -21,5 +21,11 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+# Deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
