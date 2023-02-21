@@ -6,6 +6,7 @@ eval "$(starship init zsh)"
 
 # OMZ
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 zstyle ':omz:update' mode reminder
 
