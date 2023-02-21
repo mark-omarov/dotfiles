@@ -21,3 +21,5 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
