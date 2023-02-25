@@ -19,6 +19,7 @@ stowit zsh
 stowit git
 stowit ssh
 stowit config
+stowit tmux
 
 moveFonts base
 
