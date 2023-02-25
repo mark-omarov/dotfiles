@@ -1,6 +1,9 @@
 # Autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
+# fzf keybindings and auto-completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Starship
 eval "$(starship init zsh)"
 
