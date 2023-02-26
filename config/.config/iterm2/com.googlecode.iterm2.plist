@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>Custom Color Presets</key>
@@ -827,6 +829,8 @@
 			<true/>
 			<key>ASCII Ligatures</key>
 			<true/>
+			<key>Allow Title Setting</key>
+			<false/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -1170,6 +1174,8 @@
 			<real>1</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
+			<key>Initial Text</key>
+			<string>tmux ls &amp;&amp; read tmux_session &amp;&amp; tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -1676,6 +1682,8 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Title Components</key>
+			<integer>386</integer>
 			<key>Transparency</key>
 			<real>0.075553186294880073</real>
 			<key>Unlimited Scrollback</key>
