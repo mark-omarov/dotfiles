@@ -1,3 +1,6 @@
+export XDG_CONFIG_HOME=$HOME/.config
+export PATH="$HOME/.local/bin:$PATH"
+
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_ANALYTIC=1 # Disable Homebrew analytics
@@ -9,3 +12,20 @@ eval "$(pyenv init -)"
 
 # Alias git to brew git
 alias git=/opt/homebrew/bin/git
+
+# Autojump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+# fzf keybindings and auto-completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# tmux-sessionizer by @ThePrimeagen
+bindkey -s ^f "tmux-sessionizer\n"

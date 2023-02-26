@@ -1,9 +1,3 @@
-# Autojump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
-# fzf keybindings and auto-completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Starship
 eval "$(starship init zsh)"
 
@@ -24,11 +18,3 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-# Deno
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
