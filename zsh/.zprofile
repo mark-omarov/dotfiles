@@ -29,3 +29,6 @@ export PATH="$PNPM_HOME:$PATH"
 
 # tmux-sessionizer by @ThePrimeagen
 bindkey -s ^f "tmux-sessionizer\n"
+
+# Rust/Cargo
+[ -f ~/.cargo/env ] && source $HOME/.cargo/env
