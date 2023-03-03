@@ -21,6 +21,7 @@ stowit ssh
 stowit config
 stowit tmux
 stowit bin
+stowit astronvim
 
 moveFonts base
 
