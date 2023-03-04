@@ -219,6 +219,12 @@ local config = {
         -- Configure plugins
         plugins = {
                 init = {
+                        { "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } },
+                        {
+                                "microsoft/vscode-js-debug",
+                                opt = true,
+                                run = "npm install --legacy-peer-deps && npm run compile"
+                        }
                         -- You can disable default plugins as follows:
                         -- ["goolord/alpha-nvim"] = { disable = true },
 
@@ -355,5 +361,43 @@ local config = {
                 -- }
         end,
 }
+
+require('dap-vscode-js').setup({
+        debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
+        debugger_cmd = { 'js-debug-adapter' },
+        adapters = {
+                'pwa-node',
+                'pwa-chrome',
+                'pwa-msedge',
+                'node-terminal',
+                'pwa-extensionHost',
+        },
+})
+
+-- add configuration for typescript and javascript
+for _, language in ipairs({ 'typescript', 'javascript' }) do
+        require('dap').configurations[language] = {
+                {
+                        request = 'launch',
+                        name = 'Deno launch',
+                        type = 'pwa-node',
+                        program = '${file}',
+                        cwd = '${workspaceFolder}',
+                        runtimeExecutable = vim.fn.getenv('HOME') .. '/.deno/bin/deno',
+                        runtimeArgs = { 'run', '--inspect-brk' },
+                        attachSimplePort = 9229,
+                },
+                {
+                        request = 'launch',
+                        name = 'Deno test launch',
+                        type = 'pwa-node',
+                        program = '${file}',
+                        cwd = '${workspaceFolder}',
+                        runtimeExecutable = vim.fn.getenv('HOME') .. '/.deno/bin/deno',
+                        runtimeArgs = { 'test', '--inspect-brk' },
+                        attachSimplePort = 9229,
+                },
+        }
+end
 
 return config
