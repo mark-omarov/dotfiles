@@ -111,16 +111,16 @@ local config = {
                         hop = false,
                         indent_blankline = true,
                         lightspeed = false,
-                            ["neo-tree"] = true,
+                        ["neo-tree"] = true,
                         notify = true,
-                            ["nvim-tree"] = false,
-                            ["nvim-web-devicons"] = true,
+                        ["nvim-tree"] = false,
+                        ["nvim-web-devicons"] = true,
                         rainbow = true,
                         symbols_outline = false,
                         telescope = true,
                         treesitter = true,
                         vimwiki = false,
-                            ["which-key"] = true,
+                        ["which-key"] = true,
                 },
         },
         -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
@@ -169,7 +169,7 @@ local config = {
                 -- end,
 
                 -- Add overrides for LSP server settings, the keys are the name of the server
-                    ["server-settings"] = {
+                ["server-settings"] = {
                         -- example for addings schemas to yamlls
                         -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
                         --   settings = {
@@ -204,10 +204,10 @@ local config = {
                 n = {
                         -- second key is the lefthand side of the map
                         -- mappings seen under group name "Buffer"
-                            ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
-                            ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
-                            ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
-                            ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
+                        ["<leader>bb"] = { "<cmd>tabnew<cr>", desc = "New tab" },
+                        ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", desc = "Pick to close" },
+                        ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", desc = "Pick to jump" },
+                        ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", desc = "Sort by tabs" },
                         -- quick save
                         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
                 },
@@ -224,7 +224,8 @@ local config = {
                                 "microsoft/vscode-js-debug",
                                 opt = true,
                                 run = "npm install --legacy-peer-deps && npm run compile"
-                        }
+                        },
+                        { "github/copilot.vim" }
                         -- You can disable default plugins as follows:
                         -- ["goolord/alpha-nvim"] = { disable = true },
 
@@ -248,7 +249,7 @@ local config = {
                         -- },
                 },
                 -- All other entries override the require("<key>").setup({...}) call for default plugins
-                    ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
+                ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
                         -- config variable is the default configuration table for the setup function call
                         -- local null_ls = require "null-ls"
 
@@ -266,14 +267,14 @@ local config = {
                         -- ensure_installed = { "lua" },
                 },
                 -- use mason-lspconfig to configure LSP installations
-                    ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
+                ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
                         -- ensure_installed = { "sumneko_lua" },
                 },
                 -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
-                    ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
+                ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
                         -- ensure_installed = { "prettier", "stylua" },
                 },
-                    ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
+                ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
                         -- ensure_installed = { "python" },
                 },
         },
@@ -329,16 +330,16 @@ local config = {
                 -- },
         },
         -- Modify which-key registration (Use this with mappings table in the above.)
-            ["which-key"] = {
+        ["which-key"] = {
                 -- Add bindings which show up as group name
                 register = {
                         -- first key is the mode, n == normal mode
                         n = {
                                 -- second key is the prefix, <leader> prefixes
-                                    ["<leader>"] = {
+                                ["<leader>"] = {
                                         -- third key is the key to bring up next level and its displayed
                                         -- group name in which-key top level menu
-                                            ["b"] = { name = "Buffer" },
+                                        ["b"] = { name = "Buffer" },
                                 },
                         },
                 },
@@ -399,5 +400,8 @@ for _, language in ipairs({ 'typescript', 'javascript' }) do
                 },
         }
 end
+
+-- Make copilot work with AstroNvim
+vim.g.copilot_assume_mapped = true
 
 return config
