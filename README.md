@@ -34,3 +34,6 @@ The following is an example of how to run the script manually:
 
 [stow]: https://www.gnu.org/software/stow/
 [raycast]: https://www.raycast.com/
+
+## Setting up optional plugins
+- To setup GitHub Copilot plugin follow the [official documentation](https://github.com/github/copilot.vim) or `:help copilot`
