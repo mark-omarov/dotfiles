@@ -1,5 +1,7 @@
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR=nvim
+export VISUAL=$EDITOR
 
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
