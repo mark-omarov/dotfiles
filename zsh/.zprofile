@@ -14,6 +14,7 @@ eval "$(pyenv init -)"
 
 # Alias git to brew git
 alias git=/opt/homebrew/bin/git
+alias vi=nvim
 
 # Autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
