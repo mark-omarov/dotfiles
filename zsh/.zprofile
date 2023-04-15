@@ -28,7 +28,12 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 
 # tmux-sessionizer by @ThePrimeagen
 bindkey -s ^f "tmux-sessionizer\n"
