@@ -19,3 +19,5 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+eval "$(github-copilot-cli alias -- "$0")"
