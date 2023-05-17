@@ -169,7 +169,7 @@ local config = {
                 -- end,
 
                 -- Add overrides for LSP server settings, the keys are the name of the server
-                ["server-settings"] = {
+                ["config"] = {
                         -- example for addings schemas to yamlls
                         -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
                         --   settings = {
@@ -182,6 +182,7 @@ local config = {
                         --     },
                         --   },
                         -- },
+                        -- TODO: Complete migration
                         denols = {
                                 on_attach = vim.on_attach,
                                 root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
