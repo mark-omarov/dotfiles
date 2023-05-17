@@ -30,6 +30,7 @@ ssh/.ssh/*
 !ssh/.ssh/private_id_ed25519
 !ssh/.ssh/id_ed25519.pub
 !ssh/.ssh/config
+zsh-work/
 
 # Garbage
 bin/.local
