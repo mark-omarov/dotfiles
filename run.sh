@@ -4,6 +4,8 @@
 # This is done to avoid issues when original files already exist on the machine and cannot be stowed.
 
 # Definitions #
+ENV="$1"
+
 stowit() {
     stow -t ~ -S $1 --adopt
 }
@@ -15,13 +17,17 @@ moveFonts() {
 }
 # END #
 
-stowit zsh
+if [ "$ENV" = "WORK" ]; then
+  stowit zsh-work
+else
+  stowit zsh
+fi
+
 stowit git
 stowit ssh
 stowit config
 stowit tmux
 stowit bin
-stowit astronvim
 
 moveFonts base
 
