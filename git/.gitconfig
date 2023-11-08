@@ -3,6 +3,7 @@
 [user]
   name = Mark Omarov
   email = 15357910+mark-omarov@users.noreply.github.com
+	signingkey = 855F0CDFA9843EF2
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   pushf = push --force-with-lease
@@ -13,3 +14,12 @@
   st = status -sb
 [push]
   default = current
+[pull]
+	rebase = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = true
