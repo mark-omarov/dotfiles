@@ -20,7 +20,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-eval "$(github-copilot-cli alias -- "$0")"
 export GPG_TTY=$(tty)
 
 # pnpm
