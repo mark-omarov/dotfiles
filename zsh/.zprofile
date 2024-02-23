@@ -1,6 +1,6 @@
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR=nvim
+export EDITOR=lvim
 export VISUAL=$EDITOR
 
 # Set PATH, MANPATH, etc., for Homebrew.
@@ -14,7 +14,7 @@ eval "$(pyenv init -)"
 
 # Alias git to brew git
 alias git=/opt/homebrew/bin/git
-alias vi=nvim
+alias vi=lvim
 
 # Autojump
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
