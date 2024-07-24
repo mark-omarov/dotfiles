@@ -22,7 +22,6 @@ homebrew_installed_packages:
 # homebrew_cask_apps:
 #   - raycast
 #   - docker
-#   - rectangle
 #   - 1password
 #   - adguard
 #   - keycastr
