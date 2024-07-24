@@ -1,0 +1,5 @@
+mas_installed_apps: []
+mas_uninstalled_apps:
+  - { id: 408981434, name: "iMovie" }
+  - { id: 409183694, name: "Keynote" }
+  - { id: 682658836, name: "GarageBand" }

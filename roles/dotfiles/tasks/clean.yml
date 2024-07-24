@@ -1,0 +1,15 @@
+# --- designed to be manually executed ---
+
+- name: Got secrets?
+  find:
+    paths: "{{ role_path }}/files/secrets"
+    patterns: "*.enc"
+    recurse: yes
+  register: encrypted_files
+
+- name: Clean secrets
+  file:
+    path: "{{ role_path }}/files/secrets/{{ item.path | basename | regex_replace('\\.enc$', '') }}"
+    state: absent
+  loop: "{{ encrypted_files.files }}"
+

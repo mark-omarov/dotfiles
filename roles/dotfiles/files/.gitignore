@@ -1,0 +1,10 @@
+secrets/*
+
+dotfiles/.ssh/*
+!dotfiles/.ssh/config
+!dotfiles/.ssh/*.pub
+
+dotfiles/.gnupg/*
+!dotfiles/.gnupg/common.conf
+!dotfiles/.gnupg/gpg-agent.conf
+!dotfiles/.gnupg/public-keys.d/

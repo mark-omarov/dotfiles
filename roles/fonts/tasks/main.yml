@@ -1,0 +1,17 @@
+- name: What fonts to copy?
+  find:
+    paths: "{{ role_path }}/files/fonts"
+    recurse: yes
+  register: fonts_files
+
+- name: Ensure fonts directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Fonts/"
+    state: directory
+
+- name: Copy fonts
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item.path | basename }}"
+    mode: '0644'
+  loop: "{{ fonts_files.files }}"

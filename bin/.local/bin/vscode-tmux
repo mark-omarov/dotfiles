@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-# VSCode doesn't interpolate in the "args" of terminal.integrated.profiles.{linux,osx,windows}
-# So this script is a workaround to open a new tmux session in VSCode's integrated terminal
-# See - https://github.com/microsoft/vscode/issues/123550
-
-SESSION="$(echo ${PWD##*/} | tr . _)"
-tmux attach-session -d -t $SESSION || tmux new-session -s $SESSION

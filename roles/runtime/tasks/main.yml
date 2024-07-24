@@ -1,0 +1,10 @@
+- name: Is NodeJS installed?
+  command: fnm current
+  register: fnm_current
+  changed_when: false
+
+- name: Install NodeJS LTS
+  when: fnm_current.stdout == "none"
+  command: fnm install --lts --corepack-enabled
+  register: fnm_install
+  changed_when: fnm_install.stderr is not search("warning:\ Version already installed at")

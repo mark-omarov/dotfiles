@@ -1,0 +1,26 @@
+- hosts: localhost
+  connection: local
+  vars_files:
+    - vars/homebrew.config.yml
+    - vars/mas.config.yml
+    - vars/dock.config.yml
+
+  roles:
+    - role: geerlingguy.mac.homebrew
+      tags: ['homebrew']
+    - role: geerlingguy.mac.mas
+      when: mas_installed_apps or mas_installed_app_ids
+      tags: ['mas']
+      environment:
+        PATH: "{{ homebrew_brew_bin_path }}:{{ ansible_env.PATH }}"
+    - role: geerlingguy.mac.dock
+      when: configure_dock
+      tags: ['dock']
+    - role: fonts
+      tags: ['fonts']
+    - role: dotfiles
+      tags: ['dotfiles']
+    - role: runtime
+      tags: ['runtime']
+      environment:
+        PATH: "{{ homebrew_brew_bin_path }}:{{ ansible_env.PATH }}"

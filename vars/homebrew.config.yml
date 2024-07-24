@@ -1,0 +1,28 @@
+homebrew_taps: ["jesseduffield/lazygit"]
+homebrew_installed_packages:
+  - git
+  - wget
+  - nmap
+  - gh
+  - neofetch
+  - pinentry-mac # dependency for gpg
+  - gnupg
+  - fzf # https://github.com/junegunn/fzf
+  - fnm # https://github.com/Schniz/fnm
+  - eza # https://github.com/eza-community/eza
+  - zoxide # https://github.com/ajeetdsouza/zoxide
+  - direnv # https://github.com/direnv/direnv
+  - starship # https://github.com/starship/starship
+  - zsh-autosuggestions # https://github.com/zsh-users/zsh-autosuggestions
+  - zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
+  - jesseduffield/lazygit/lazygit # https://github.com/jesseduffield/lazygit
+# I only install these on the first run to avoid false 'failed' messages and brew's taking long time to detect installations.
+# homebrew_cask_apps:
+#   - raycast
+#   - docker
+#   - rectangle
+#   - 1password
+#   - adguard
+#   - keycastr
+#   - kap
+#   - wezterm # https://github.com/wez/wezterm

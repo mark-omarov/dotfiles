@@ -1,0 +1,17 @@
+[init]
+  defaultBranch = main
+[user]
+  name = Mark Omarov
+  email = 15357910+mark-omarov@users.noreply.github.com
+	signingkey = 855F0CDFA9843EF2
+[push]
+  default = current
+[pull]
+	rebase = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = true

@@ -1,0 +1,41 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+command_timeout = 50000
+
+[cmd_duration]
+min_time = 5000
+format = 'underwent [$duration](bold yellow)'
+
+[directory]
+truncate_to_repo = true
+
+[docker_context]
+disabled = true
+
+[git_branch]
+ignore_branches = ['master', 'main']
+
+[git_status]
+conflicted = '🏳'
+ahead = '🏎💨'
+behind = '😰'
+diverged = '😵'
+up_to_date = ''
+untracked = '🤷'
+stashed = ''
+modified = '📝'
+staged = '[++\($count\)](green)'
+renamed = '👅'
+deleted = '🗑 '
+disabled = false
+
+[sudo]
+disabled = false
+
+[[battery.display]]
+threshold = 40
+style = 'bold red'
+
+[package]
+disabled = true
+

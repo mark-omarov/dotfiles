@@ -1,0 +1,46 @@
+- name: Got secrets?
+  find:
+    paths: "{{ role_path }}/files/secrets"
+    patterns: "*.enc"
+    recurse: yes
+  register: encrypted_files
+
+# --- dotfiles secrets ---
+- name: Filter secrets for setup
+  set_fact:
+    setup_secrets: "{{ dotfiles_secrets | selectattr('src', 'in', encrypted_files.files | map(attribute='path')) | list }}"
+
+- name: Setup secrets
+  when: setup_secrets | length > 0
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0600') }}"
+  loop: "{{ setup_secrets }}"
+# ------
+
+# --- other, not dotfiles specific secrets ---
+- name: Filter secrets for decryption
+  set_fact:
+    decrypt_secrets: "{{ encrypted_files.files | rejectattr('path', 'in', dotfiles_secrets | map(attribute='src')) | list }}"
+
+- name: Decrypt other secrets
+  when: decrypt_secrets | length > 0
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ role_path }}/files/secrets/{{ item.path | basename | regex_replace('\\.enc$', '') }}"
+    decrypt: yes
+  loop: "{{ decrypt_secrets }}"
+# ------
+
+- name: Ensure GNU Stow is installed
+  package:
+    name: stow
+    state: present
+
+- name: Run stow to symlink dotfiles
+  command: stow --target ~ --adopt --verbose 1 dotfiles
+  args:
+    chdir: "{{ role_path }}/files"
+  register: stow_result
+  changed_when: "'LINK:' in stow_result.stderr"
