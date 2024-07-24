@@ -1,4 +1,4 @@
-homebrew_taps: ["jesseduffield/lazygit"]
+homebrew_taps: ["jesseduffield/lazygit", "koekeishiya/formulae"]
 homebrew_installed_packages:
   - git
   - wget
@@ -16,6 +16,8 @@ homebrew_installed_packages:
   - zsh-autosuggestions # https://github.com/zsh-users/zsh-autosuggestions
   - zsh-syntax-highlighting # https://github.com/zsh-users/zsh-syntax-highlighting
   - jesseduffield/lazygit/lazygit # https://github.com/jesseduffield/lazygit
+  - koekeishiya/formulae/yabai # https://github.com/koekeishiya/yabai
+  - koekeishiya/formulae/skhd # https://github.com/koekeishiya/skhd
 # I only install these on the first run to avoid false 'failed' messages and brew's taking long time to detect installations.
 # homebrew_cask_apps:
 #   - raycast
