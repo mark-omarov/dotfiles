@@ -1,7 +1,5 @@
 # Dotfiles
 
-![GitHub License](https://img.shields.io/github/license/mark-omarov/dotfiles)
-
 These are my dotfiles. I use ansible to manage them. The playbook is designed to be run on macOS, I cannot guarantee it will work on other systems.
 
 ![Kapture 2024-07-25 at 05 48 46](https://github.com/user-attachments/assets/8bf78923-77f9-47c1-a6ea-7293f110614b)
