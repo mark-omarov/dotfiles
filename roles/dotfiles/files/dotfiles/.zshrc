@@ -33,7 +33,8 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # --- zsh syntax highlighting ---
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# --- zsh git plugin ---
+# --- zsh plugins ---
+source $XDG_CONFIG_HOME/zsh/git.zsh
 source $XDG_CONFIG_HOME/zsh/git.plugin.zsh
 
 # --- zsh history ---
