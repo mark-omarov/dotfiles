@@ -1,39 +1,66 @@
-# Mark's Dotfiles
+# Dotfiles
 
-> BE AWARE! If you execute the script it will replace any existing files with symlinks, and will not prompt you to confirm nor create a backup. Proceed with caution. I do not take any responsibility for the data loss. You have been warned.
+![License](https://img.shields.io/github/license/mark-omarov/dotfiles)
 
-This is meant to be a backup of my configurations.
-I use [stow][stow] to manage the symlinks, and a little hack to avoid issues with existing files. Be aware that the script to automatically apply configuration changes is destructive, and will essentially replace any existing files with symlinks.
+These are my dotfiles. I use ansible to manage them. The playbook is designed to be run on macOS, I cannot guarantee it will work on other systems.
 
-There are a few exceptions:
-- `fonts` - macOS does not support symlinks in the `~/Library/Fonts` directory. The script will hard link files to that directory (doesn't override existing if present). If you don't use the script - you can manually place the fonts in the directory.
-- `ssh` - it contains my **encrypted** private key, you don't have the key to decrypt the file, you will have to replace the file with your own. Don't forget to replace the public key as well. And if you were to use this repository - **don't forget to encrypt your private key** before pushing it to the repository.
-- `raycast` - it contains my **encrypted** settings, additionally [Raycast][raycast] doesn't support automatic import at this time and the settings needs to be imported manually though the application itself. Settings might contain sensitive information, please use encryption for your settings as well.
+## Highlights
 
-## Prerequisites
-You can use any method to apply the configuration changes, but I use a script to automate the process. The script is written in bash, and requires the following packages to be installed:
-- git
-- stow
+- Automated setup with [Ansible](https://github.com/ansible/ansible)
+- Homebrew, macOS dock and mas applications setup (see `vars/` directory)
+- [Starship](https://starship.rs/) prompt with [Hack Nerd Font](https://www.nerdfonts.com/)
+- [Wezterm](https://wezfurlong.org/wezterm/) minimal style terminal configuration
+- [Yabai](https://github.com/koekeishiya/yabai) and [skhd](https://github.com/koekeishiya/skhd) window manager and hotkey daemon
+- Secrets management with [ansible-vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html) (private submodule)
+- Runtimes: NodeJS LTS with Corepack enabled
 
-## Applying the configuration changes
+## Installation
 
-This setup is designed to be executed by an ansible playbook, but you can also run the script manually.
+- Make sure you got xcode command line tools: `xcode-select --install`
+- Make sure you got `python3`, I recommend using [pyenv](https://github.com/pyenv/pyenv) to manage python versions.
+- Install ansible: `pip3 install ansible`
+- Install ansible dependencies: `ansible-galaxy install -r requirements.yml`
 
-The following is an example playbook:
-```yaml
-- name: Ensure dotfiles stowed
-  ansible.builtin.shell: "./run.sh"
-  args:
-    chdir: "/path/to/your/dotfiles/directory"
-```
+## Usage
 
-The following is an example of how to run the script manually:
+> [!IMPORTANT]
+> Do not blindly run the setup. Thoroughly review all roles and playbooks, make any necessary changes to fit your needs, especially where my no-reply email and other info is specified.
+>
+> The playbook will not prompt you to confirm nor create a backup. Proceed with caution. I do not take any responsibility for the data loss. You have been warned.
+>
+> Be aware that `roles/dotfiles/files/secrets` is a git submodule to a private repository with encrypted files I use. If you want a similar setup, you will need to configure it yourself. However, the playbook should work without it.
+
+To apply the configuration changes, run the following command:
+
 ```bash
-./run.sh
+make setup
 ```
 
-[stow]: https://www.gnu.org/software/stow/
-[raycast]: https://www.raycast.com/
+You may augment the command with any valid ansible options, for example, if you use ansible-vault, you might run:
 
-## Setting up optional plugins
-- To setup GitHub Copilot plugin follow the [official documentation](https://github.com/github/copilot.vim) or `:help copilot`
+```bash
+make setup ARGS="--ask-vault-pass"
+```
+
+To complete the setup, you will need to manually start yabai and skhd services and configure their permissions.
+
+```bash
+yabai --start-service
+skhd --start-service
+```
+
+## Secrets Management
+
+The `dotfiles` role supports a secrets submodule. It's best for you to review the role to see how it works exactly. But in short, it will decrypt all files that end with `.enc` under `roles/dotfiles/files/secrets` using ansible-vault. You **have to** make adjustments to fit your needs.
+
+**Why I automate secrets setup?**
+
+I don't like setting up ssh, gpg, or other keys and credentials manually. I prefer to have them encrypted and stored in a private repository. This way I can easily clone the repository and have all the necessary files in place. The `dotfiles` role outlines what secrets are dotfiles specific and will be decrypted, moved to correct location, and symlinked. And what secrets are not, and will be decrypted and left as is. I use non-dotfiles secrets to setup applications that don't have a configuration file that can be symlinked or require manual import.
+
+**Can I clean up non-dotfiles secrets?**
+
+If you use secrets submodule, after running the playbook, you may want to remove all decrypted non-dotfiles files from the secrets directory after you manually import them in your applications. You can do this by running:
+
+```bash
+make clean
+```
