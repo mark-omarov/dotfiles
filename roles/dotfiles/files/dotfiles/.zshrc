@@ -47,8 +47,8 @@ setopt hist_ignore_dups
 setopt hist_verify
 
 # --- zsh key bindings ---
-bindkey "^[f" forward-word
-bindkey "^[b" backward-word
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
