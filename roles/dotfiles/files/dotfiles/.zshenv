@@ -16,7 +16,7 @@ alias git=/opt/homebrew/bin/git
 . "$HOME/.cargo/env"
 
 # --- local bin ---
-export PATH=/Users/mark.omarov/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # --- lvim (requires lvim setup) ---
 export EDITOR=lvim
