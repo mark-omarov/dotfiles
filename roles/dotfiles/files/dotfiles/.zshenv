@@ -1,6 +1,4 @@
 export XDG_CONFIG_HOME=$HOME/.config
-export EDITOR=vi
-export VISUAL=$EDITOR
 
 # --- homebrew ---
 export HOMEBREW_NO_ANALYTIC=1
@@ -13,3 +11,13 @@ eval "$(pyenv init -)"
 
 # --- git ---
 alias git=/opt/homebrew/bin/git
+
+# --- rust ---
+. "$HOME/.cargo/env"
+
+# --- local bin ---
+export PATH=/Users/mark.omarov/.local/bin:$PATH
+
+# --- lvim (requires lvim setup) ---
+export EDITOR=lvim
+export VISUAL=$EDITOR

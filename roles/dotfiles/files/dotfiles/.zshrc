@@ -68,8 +68,3 @@ lg() {
     rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
   fi
 }
-
-# --- rust ---
-if [ -f "$HOME/.cargo/env" ]; then
-  . "$HOME/.cargo/env"
-fi
