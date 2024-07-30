@@ -19,6 +19,7 @@ homebrew_installed_packages:
   - koekeishiya/formulae/yabai # https://github.com/koekeishiya/yabai
   - koekeishiya/formulae/skhd # https://github.com/koekeishiya/skhd
   - withgraphite/tap/graphite
+  - ripgrep
 # I only install these on the first run to avoid false 'failed' messages and brew's taking long time to detect installations.
 # homebrew_cask_apps:
 #   - raycast
