@@ -8,3 +8,6 @@ dotfiles/.gnupg/*
 !dotfiles/.gnupg/common.conf
 !dotfiles/.gnupg/gpg-agent.conf
 !dotfiles/.gnupg/public-keys.d/
+
+dotfiles/.config/gh/
+dotfiles/.config/raycast/
