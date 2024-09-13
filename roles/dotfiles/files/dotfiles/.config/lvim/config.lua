@@ -6,4 +6,16 @@
 
 lvim.transparent_window = true
 lvim.format_on_save = true
+
 vim.opt.relativenumber = true
+
+require('lvim.lsp.manager').setup('yamlls', {
+  settings = {
+    yaml = {
+      customTags = {
+        -- ansible-vault
+        "!vault scalar"
+      }
+    }
+  }
+})
