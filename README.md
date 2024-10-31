@@ -20,6 +20,7 @@ These are my dotfiles. I use ansible to manage them. The playbook is designed to
 - Make sure you got `python3`, I recommend using [pyenv](https://github.com/pyenv/pyenv) to manage python versions.
 - Install ansible: `pip3 install ansible`
 - Install ansible dependencies: `ansible-galaxy install -r requirements.yml`
+- Install [tmux plugin manager](https://github.com/tmux-plugins/tpm)
 
 ## Usage
 
