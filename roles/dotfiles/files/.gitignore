@@ -10,4 +10,5 @@ dotfiles/.gnupg/*
 !dotfiles/.gnupg/public-keys.d/
 
 dotfiles/.config/gh/
+dotfiles/.config/github-copilot/
 dotfiles/.config/raycast/
