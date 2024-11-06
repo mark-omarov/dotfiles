@@ -31,3 +31,18 @@ table.insert(lvim.plugins, {
     end, 100)
   end,
 })
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "eslint", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } }
+}
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    command = "prettier",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  },
+}
+
+require("lvim.lsp.manager").setup "tailwindcss"
