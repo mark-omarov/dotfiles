@@ -21,3 +21,6 @@ export PATH=$HOME/.local/bin:$PATH
 # --- lvim (requires lvim setup) ---
 export EDITOR=lvim
 export VISUAL=$EDITOR
+
+# --- go ---
+export PATH=$PATH:$HOME/go/bin
