@@ -22,4 +22,5 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Kap$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
 yabai -m rule --add app="Rider" manage=off
+yabai -m rule --add app="Godot" manage=off
 
