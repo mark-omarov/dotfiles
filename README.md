@@ -10,7 +10,6 @@ These are my dotfiles. I use ansible to manage them. The playbook is designed to
 - Homebrew, macOS dock and mas applications setup (see `vars/` directory)
 - [Starship](https://starship.rs/) prompt with [Hack Nerd Font](https://www.nerdfonts.com/)
 - [Wezterm](https://wezfurlong.org/wezterm/) minimal style terminal configuration
-- [Yabai](https://github.com/koekeishiya/yabai) and [skhd](https://github.com/koekeishiya/skhd) window manager and hotkey daemon
 - Secrets management with [ansible-vault](https://docs.ansible.com/ansible/latest/vault_guide/index.html) (private submodule)
 - Runtimes: NodeJS LTS with Corepack enabled
 
@@ -43,10 +42,9 @@ You may augment the command with any valid ansible options, for example, if you 
 make setup ARGS="--ask-vault-pass"
 ```
 
-To complete the setup, you will need to manually start yabai and skhd services and configure their permissions.
+To complete the setup, you will need to manually start skhd service and configure the permissions.
 
 ```bash
-yabai --start-service
 skhd --start-service
 ```
 
