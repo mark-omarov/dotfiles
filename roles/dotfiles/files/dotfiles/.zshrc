@@ -1,4 +1,3 @@
-
 # --- pyenv ---
 eval "$(pyenv virtualenv-init -)"
 
@@ -68,3 +67,20 @@ lg() {
     rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
   fi
 }
+
+# --- tmux ---
+if [ -z "$TMUX" ]; then
+  if tmux has-session -t default 2>/dev/null; then
+    tmux attach-session -t default
+  else
+    tmux new-session -s default
+  fi
+fi
+
+# --- tmux sessionizer ---
+function run_txs() {
+  ~/.config/zsh/tmux-sessionizer ~/ ~/workspace/*/* ~/repos
+}
+
+zle -N run_txs
+bindkey '^F' run_txs

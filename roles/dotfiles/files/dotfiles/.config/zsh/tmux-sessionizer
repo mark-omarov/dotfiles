@@ -1,0 +1,57 @@
+#!/usr/bin/env zsh
+
+switch_to() {
+  local session_name="$1"
+  if [[ -z $TMUX ]]; then
+    tmux attach-session -t "$session_name"
+  else
+    tmux switch-client -t "$session_name"
+  fi
+}
+
+has_session() {
+  tmux list-sessions 2>/dev/null | grep -q "^${1}:"
+}
+
+hydrate() {
+  local session_name="$1"
+  local dir_path="$2"
+  if [[ -f "$dir_path/.tmux-sessionizer" ]]; then
+    tmux send-keys -t "$session_name" "source $dir_path/.tmux-sessionizer" C-m
+  elif [[ -f "$HOME/.tmux-sessionizer" ]]; then
+    tmux send-keys -t "$session_name" "source $HOME/.tmux-sessionizer" C-m
+  fi
+}
+
+selected="$(
+  find "$@" -mindepth 1 -maxdepth 1 -type d 2>/dev/null \
+  | fzf \
+      --prompt='Select a directory> ' \
+      --preview '
+        session_name="$(basename {} | tr . _)"
+        if tmux has-session -t "$session_name" 2>/dev/null; then
+          tmux capture-pane -ept "$session_name" 2>/dev/null
+        else
+          echo "No session found for $session_name"
+        fi
+      '
+)"
+
+[[ -z $selected ]] && exit 0
+
+selected_name="$(basename "$selected" | tr . _)"
+
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX && -z $tmux_running ]]; then
+  tmux new-session -s "$selected_name" -c "$selected"
+  hydrate "$selected_name" "$selected"
+  exit 0
+fi
+
+if ! has_session "$selected_name"; then
+  tmux new-session -ds "$selected_name" -c "$selected"
+  hydrate "$selected_name" "$selected"
+fi
+
+switch_to "$selected_name"
