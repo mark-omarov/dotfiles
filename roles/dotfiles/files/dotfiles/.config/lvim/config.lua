@@ -26,7 +26,10 @@ table.insert(lvim.plugins, {
   dependencies = { "zbirenbaum/copilot.lua" },
   config = function()
     vim.defer_fn(function()
-      require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })                             -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
       require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
     end, 100)
   end,
@@ -92,4 +95,17 @@ table.insert(lvim.plugins, {
       ft = { "markdown", "Avante" },
     },
   },
+})
+
+table.insert(lvim.plugins, {
+  "CopilotC-Nvim/CopilotChat.nvim",
+  dependencies = {
+    { "zbirenbaum/copilot.lua" },                   -- or zbirenbaum/copilot.lua
+    { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+  },
+  build = "make tiktoken",                          -- Only on MacOS or Linux
+  opts = {
+    -- See Configuration section for options
+  },
+  -- See Commands section for default commands if you want to lazy load on them
 })
