@@ -6,6 +6,7 @@
 
 lvim.transparent_window = true
 lvim.format_on_save = true
+vim.opt.laststatus = 3
 
 vim.opt.relativenumber = true
 
@@ -54,7 +55,7 @@ table.insert(lvim.plugins, {
   "yetone/avante.nvim",
   event = "VeryLazy",
   lazy = false,
-  version = false, -- set this if you want to always pull the latest change
+  version = true, -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
   },
