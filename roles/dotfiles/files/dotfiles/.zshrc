@@ -121,4 +121,6 @@ function y() {
 }
 
 # --- don't peek 🤫 ---
-source ~/.config/zsh/.zshrc.local
+if [ -f ~/.config/zsh/.zshrc.local ]; then
+  source ~/.config/zsh/.zshrc.local
+fi
