@@ -20,6 +20,16 @@ homebrew_installed_packages:
   - withgraphite/tap/graphite
   - ripgrep
   - neovim
+  # --- yazi --- #
+  - yazi
+  - ffmpeg
+  - sevenzip
+  - jq
+  - poppler
+  - fd
+  - imagemagick
+  - font-symbols-only-nerd-font
+  # --- #
 # I only install these on the first run to avoid false 'failed' messages and brew's taking long time to detect installations.
 # homebrew_cask_apps:
 #   - raycast
