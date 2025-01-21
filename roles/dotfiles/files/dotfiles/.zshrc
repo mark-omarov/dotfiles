@@ -109,6 +109,7 @@ bindkey '^F' run_txs
 # --- lvim (requires lvim setup) ---
 export EDITOR="lvim"
 export VISUAL=$EDITOR
+alias vv=$EDITOR
 
 # --- yazi ---
 function y() {
