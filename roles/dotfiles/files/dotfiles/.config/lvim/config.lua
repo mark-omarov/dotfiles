@@ -5,21 +5,9 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
 lvim.transparent_window = true
-lvim.format_on_save = true
+lvim.format_on_save.enabled = true
 vim.opt.laststatus = 3
-
 vim.opt.relativenumber = true
-
-require('lvim.lsp.manager').setup('yamlls', {
-  settings = {
-    yaml = {
-      customTags = {
-        -- ansible-vault
-        "!vault scalar"
-      }
-    }
-  }
-})
 
 table.insert(lvim.plugins, {
   "zbirenbaum/copilot-cmp",
@@ -30,83 +18,64 @@ table.insert(lvim.plugins, {
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
-      })                             -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
-      require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+      })
+      require("copilot_cmp").setup()
     end, 100)
   end,
 })
 
 local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { command = "eslint", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } }
-}
+linters.setup({
+  {
+    command = "eslint",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  },
+})
 
 local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
+formatters.setup({
   {
     command = "prettier",
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   },
-}
-
-require("lvim.lsp.manager").setup "tailwindcss"
-
-table.insert(lvim.plugins, {
-  "yetone/avante.nvim",
-  event = "VeryLazy",
-  lazy = false,
-  version = true, -- set this if you want to always pull the latest change
-  opts = {
-    -- add any opts here
-  },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  dependencies = {
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    --- The below dependencies are optional,
-    "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua",      -- for providers='copilot'
-    {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
-      opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
-          },
-          -- required for Windows users
-          use_absolute_path = true,
-        },
-      },
-    },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
-    },
-  },
 })
+
+require("lvim.lsp.manager").setup("tailwindcss")
+require("lvim.lsp.manager").setup("tsserver")
+require("lvim.lsp.manager").setup("docker_compose_language_service")
+require("lvim.lsp.manager").setup("prettier")
 
 table.insert(lvim.plugins, {
   "CopilotC-Nvim/CopilotChat.nvim",
   dependencies = {
-    { "zbirenbaum/copilot.lua" },                   -- or zbirenbaum/copilot.lua
-    { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    { "zbirenbaum/copilot.lua" },
+    { "nvim-lua/plenary.nvim", branch = "master" },
   },
-  build = "make tiktoken",                          -- Only on MacOS or Linux
-  opts = {
-    -- See Configuration section for options
-  },
-  -- See Commands section for default commands if you want to lazy load on them
+  build = "make tiktoken",
+  opts = {},
 })
+
+------------------------------------------------
+-- DAP / Debugging Plugins for JS & TS
+------------------------------------------------
+table.insert(lvim.plugins, {
+  "mfussenegger/nvim-dap",
+})
+
+require("dap").adapters["pwa-node"] = {
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = "node",
+    args = {"/Users/mark-omarov/.config/js-debug-dap/js-debug/src/dapDebugServer.js", "${port}"},
+  }
+}
+
+------------------------------------------------
+-- Auto-load a per-project DAP config if it exists
+------------------------------------------------
+local project_dap_path = vim.fn.getcwd() .. "/.nvim/dap.lua"
+if vim.fn.filereadable(project_dap_path) == 1 then
+  dofile(project_dap_path)
+end

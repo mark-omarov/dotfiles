@@ -22,6 +22,10 @@ export PATH=$HOME/.local/bin:$PATH
 # --- go ---
 export PATH=$PATH:$HOME/go/bin
 
+
+#--- webstorm ---
+export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
+
 # --- fzf ---
 source <(fzf --zsh)
 
@@ -90,11 +94,13 @@ lg() {
 }
 
 # --- tmux ---
-if [ -z "$TMUX" ]; then
-  if tmux has-session -t default 2>/dev/null; then
-    tmux attach-session -t default
-  else
-    tmux new-session -s default
+if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" && "$TERM_PROGRAM" != "vscode" ]]; then
+  if [ -z "$TMUX" ]; then
+    if tmux has-session -t default 2>/dev/null; then
+      tmux attach-session -t default
+    else
+      tmux new-session -s default
+    fi
   fi
 fi
 
@@ -125,3 +131,4 @@ function y() {
 if [ -f ~/.config/zsh/.zshrc.local ]; then
   source ~/.config/zsh/.zshrc.local
 fi
+
