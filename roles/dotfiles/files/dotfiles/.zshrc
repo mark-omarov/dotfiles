@@ -132,3 +132,10 @@ if [ -f ~/.config/zsh/.zshrc.local ]; then
   source ~/.config/zsh/.zshrc.local
 fi
 
+
+# bun completions
+[ -s "/Users/mark-omarov/.bun/_bun" ] && source "/Users/mark-omarov/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
