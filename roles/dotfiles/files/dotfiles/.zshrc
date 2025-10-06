@@ -113,7 +113,7 @@ zle -N run_txs
 bindkey '^F' run_txs
 
 # --- lvim (requires lvim setup) ---
-export EDITOR="lvim"
+export EDITOR="nvim"
 export VISUAL=$EDITOR
 alias vv=$EDITOR
 
