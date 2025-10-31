@@ -1,0 +1,159 @@
+---
+# Linux package management role
+# Installs common packages and tools on Linux systems
+
+- name: Update package cache (Debian/Ubuntu)
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  when: ansible_os_family == "Debian"
+
+- name: Update package cache (Arch)
+  pacman:
+    update_cache: yes
+  become: yes
+  when: ansible_os_family == "Archlinux"
+
+- name: Install common packages (Debian/Ubuntu)
+  apt:
+    name: "{{ common_packages }}"
+    state: present
+  become: yes
+  when: ansible_os_family == "Debian"
+  ignore_errors: yes  # Some packages might have different names
+
+- name: Install Linux-specific packages (Debian/Ubuntu)
+  apt:
+    name: "{{ linux_specific_packages }}"
+    state: present
+  become: yes
+  when: ansible_os_family == "Debian"
+  ignore_errors: yes
+
+- name: Install common packages (Fedora/RedHat)
+  dnf:
+    name: "{{ common_packages }}"
+    state: present
+  become: yes
+  when: ansible_os_family == "RedHat"
+  ignore_errors: yes
+
+- name: Install Linux-specific packages (Fedora/RedHat)
+  dnf:
+    name: "{{ linux_specific_packages }}"
+    state: present
+  become: yes
+  when: ansible_os_family == "RedHat"
+  ignore_errors: yes
+
+- name: Install common packages (Arch)
+  pacman:
+    name: "{{ common_packages }}"
+    state: present
+  become: yes
+  when: ansible_os_family == "Archlinux"
+  ignore_errors: yes
+
+- name: Install Linux-specific packages (Arch)
+  pacman:
+    name: "{{ linux_specific_packages }}"
+    state: present
+  become: yes
+  when: ansible_os_family == "Archlinux"
+  ignore_errors: yes
+
+# Special installations for tools not in standard repos
+
+- name: Check if fnm is installed
+  command: which fnm
+  register: fnm_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install fnm (Fast Node Manager)
+  shell: curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+  when: fnm_check.rc != 0
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/share/fnm/fnm"
+
+- name: Check if starship is installed
+  command: which starship
+  register: starship_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install starship prompt
+  shell: curl -sS https://starship.rs/install.sh | sh -s -- -y
+  when: starship_check.rc != 0
+  become: yes
+
+- name: Check if eza is installed
+  command: which eza
+  register: eza_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install eza (modern ls) via cargo if not available
+  shell: cargo install eza
+  when: eza_check.rc != 0
+  environment:
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+  ignore_errors: yes
+
+- name: Check if zoxide is installed
+  command: which zoxide
+  register: zoxide_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install zoxide via cargo if not available
+  shell: cargo install zoxide --locked
+  when: zoxide_check.rc != 0
+  environment:
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+  ignore_errors: yes
+
+- name: Check if yazi is installed
+  command: which yazi
+  register: yazi_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install yazi via cargo if not available
+  shell: cargo install --locked yazi-fm yazi-cli
+  when: yazi_check.rc != 0
+  environment:
+    PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+  ignore_errors: yes
+
+- name: Install lazygit (Debian/Ubuntu)
+  block:
+    - name: Add lazygit PPA
+      apt_repository:
+        repo: ppa:lazygit-team/release
+        state: present
+      become: yes
+
+    - name: Install lazygit
+      apt:
+        name: lazygit
+        state: present
+        update_cache: yes
+      become: yes
+  when: ansible_os_family == "Debian"
+  ignore_errors: yes
+
+- name: Check if direnv is installed
+  command: which direnv
+  register: direnv_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install direnv if not available
+  apt:
+    name: direnv
+    state: present
+  become: yes
+  when: ansible_os_family == "Debian" and direnv_check.rc != 0
+  ignore_errors: yes

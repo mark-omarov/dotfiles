@@ -1,26 +1,69 @@
 - hosts: localhost
   connection: local
-  vars_files:
-    - vars/homebrew.config.yml
-    - vars/mas.config.yml
-    - vars/dock.config.yml
+
+  tasks:
+    - name: Display detected OS information
+      debug:
+        msg: "Running on {{ ansible_os_family }} ({{ ansible_distribution }} {{ ansible_distribution_version }})"
+
+    - name: Load common variables
+      include_vars:
+        file: vars/common.yml
+
+    - name: Load macOS-specific variables
+      include_vars:
+        file: vars/macos.yml
+      when: ansible_os_family == "Darwin"
+
+    - name: Load macOS Homebrew configuration
+      include_vars:
+        file: vars/homebrew.config.yml
+      when: ansible_os_family == "Darwin"
+
+    - name: Load macOS App Store configuration
+      include_vars:
+        file: vars/mas.config.yml
+      when: ansible_os_family == "Darwin"
+
+    - name: Load macOS Dock configuration
+      include_vars:
+        file: vars/dock.config.yml
+      when: ansible_os_family == "Darwin"
+
+    - name: Load Linux-specific variables
+      include_vars:
+        file: vars/linux.yml
+      when: ansible_os_family != "Darwin"
 
   roles:
+    # macOS-specific roles (only run on macOS)
     - role: geerlingguy.mac.homebrew
-      tags: ['homebrew']
+      tags: ['homebrew', 'macos']
+      when: ansible_os_family == "Darwin"
+
     - role: geerlingguy.mac.mas
-      when: mas_installed_apps or mas_installed_app_ids
-      tags: ['mas']
+      when: ansible_os_family == "Darwin" and (mas_installed_apps | default([]) | length > 0 or mas_installed_app_ids | default([]) | length > 0)
+      tags: ['mas', 'macos']
       environment:
-        PATH: "{{ homebrew_brew_bin_path }}:{{ ansible_env.PATH }}"
+        PATH: "{{ homebrew_brew_bin_path | default('/opt/homebrew/bin') }}:{{ ansible_env.PATH }}"
+
     - role: geerlingguy.mac.dock
-      when: configure_dock
-      tags: ['dock']
+      when: ansible_os_family == "Darwin" and configure_dock | default(false)
+      tags: ['dock', 'macos']
+
+    # Linux-specific roles (only run on Linux)
+    - role: packages
+      tags: ['packages', 'linux']
+      when: ansible_os_family != "Darwin"
+
+    # Cross-platform roles (run on all systems)
     - role: fonts
       tags: ['fonts']
+
     - role: dotfiles
       tags: ['dotfiles']
+
     - role: runtime
       tags: ['runtime']
       environment:
-        PATH: "{{ homebrew_brew_bin_path }}:{{ ansible_env.PATH }}"
+        PATH: "{{ homebrew_brew_bin_path | default('/usr/local/bin') }}:{{ ansible_env.PATH }}"

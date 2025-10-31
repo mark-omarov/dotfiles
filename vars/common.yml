@@ -1,0 +1,33 @@
+# Common packages across all operating systems
+# These packages should be available via native package managers on all platforms
+
+common_packages:
+  - git
+  - wget
+  - nmap
+  - neofetch
+  - gnupg
+  - fzf
+  - ripgrep
+  - neovim
+  - ffmpeg
+  - jq
+  - fd-find  # Note: 'fd' on some distros
+  - imagemagick
+  - tmux
+  - stow
+
+# Tools that need to be installed via alternative methods (curl scripts, etc.)
+# These are handled in the packages role with specific installation tasks
+alternative_install_tools:
+  - fnm       # Fast Node.js Manager
+  - starship  # Cross-shell prompt
+  - eza       # Modern ls replacement
+  - zoxide    # Smart cd replacement
+  - direnv    # Environment management
+  - yazi      # Terminal file manager
+
+# Optional dependencies for yazi
+yazi_dependencies:
+  - p7zip-full  # or sevenzip
+  - poppler-utils  # or poppler

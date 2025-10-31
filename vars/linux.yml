@@ -1,0 +1,33 @@
+# Linux-specific configuration
+# This file contains packages and settings that are only relevant for Linux systems
+
+# Linux-specific packages
+linux_specific_packages:
+  - pinentry-tty      # Terminal-based GPG pinentry
+  - xdg-utils         # Desktop integration tools
+  - curl              # Required for installation scripts
+  - build-essential   # Compilation tools (Debian/Ubuntu)
+  - zsh               # Ensure zsh is installed
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+
+# Distribution-specific package mappings
+# Some packages have different names across distributions
+debian_package_map:
+  fd-find: fd-find
+  p7zip: p7zip-full
+  poppler: poppler-utils
+
+arch_package_map:
+  fd-find: fd
+  p7zip: p7zip
+  poppler: poppler
+
+fedora_package_map:
+  fd-find: fd-find
+  p7zip: p7zip
+  poppler: poppler-utils
+  build-essential: "@development-tools"
+
+# Package manager specific settings
+use_sudo: true  # Most Linux operations require sudo

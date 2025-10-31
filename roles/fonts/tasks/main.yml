@@ -4,14 +4,30 @@
     recurse: yes
   register: fonts_files
 
+- name: Set font directory for macOS
+  set_fact:
+    font_directory: "{{ ansible_env.HOME }}/Library/Fonts/"
+  when: ansible_os_family == "Darwin"
+
+- name: Set font directory for Linux
+  set_fact:
+    font_directory: "{{ ansible_env.HOME }}/.local/share/fonts/"
+  when: ansible_os_family != "Darwin"
+
 - name: Ensure fonts directory exists
   file:
-    path: "{{ ansible_env.HOME }}/Library/Fonts/"
+    path: "{{ font_directory }}"
     state: directory
+    mode: '0755'
 
 - name: Copy fonts
   copy:
     src: "{{ item.path }}"
-    dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item.path | basename }}"
+    dest: "{{ font_directory }}{{ item.path | basename }}"
     mode: '0644'
   loop: "{{ fonts_files.files }}"
+
+- name: Update font cache (Linux only)
+  command: fc-cache -f
+  when: ansible_os_family != "Darwin"
+  changed_when: true

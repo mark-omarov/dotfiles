@@ -18,6 +18,10 @@ config.colors = {
   brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 }
 config.window_background_opacity = 0.75
-config.macos_window_background_blur = 10
+
+-- macOS-specific window blur effect
+if wezterm.target_triple:find("darwin") then
+  config.macos_window_background_blur = 10
+end
 
 return config

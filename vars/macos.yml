@@ -1,0 +1,35 @@
+# macOS-specific configuration
+# This file contains packages and settings that are only relevant for macOS systems
+
+# macOS-specific packages (via Homebrew)
+macos_specific_packages:
+  - pinentry-mac  # macOS GPG pinentry
+  - koekeishiya/formulae/skhd  # macOS hotkey daemon
+
+# Homebrew tap repositories
+macos_homebrew_taps:
+  - jesseduffield/lazygit
+  - koekeishiya/formulae
+  - withgraphite/tap
+
+# GUI applications (Homebrew casks) - commented out for first run
+# Uncomment and customize as needed
+# macos_cask_apps:
+#   - raycast
+#   - docker
+#   - 1password
+#   - adguard
+#   - keycastr
+#   - kap
+#   - wezterm
+
+# macOS App Store configuration
+configure_mas: false
+mas_installed_apps: []
+mas_uninstall_apps:
+  - 408981434  # iMovie
+  - 409183694  # Keynote
+  - 682658836  # GarageBand
+
+# macOS Dock configuration
+configure_dock: true

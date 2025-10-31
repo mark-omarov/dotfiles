@@ -1,17 +1,30 @@
 export XDG_CONFIG_HOME=$HOME/.config
 
-# --- homebrew ---
-export HOMEBREW_NO_ANALYTIC=1
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# --- OS detection ---
+OS_TYPE="$(uname -s)"
+
+# --- homebrew (macOS only) ---
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+  export HOMEBREW_NO_ANALYTIC=1
+  if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    BREW_PREFIX="/opt/homebrew"
+  elif [[ -f "/usr/local/bin/brew" ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+    BREW_PREFIX="/usr/local"
+  fi
+
+  # Use Homebrew git on macOS
+  [[ -n "$BREW_PREFIX" ]] && alias git="$BREW_PREFIX/bin/git"
+fi
 
 # --- pyenv ---
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# --- git ---
-alias git=/opt/homebrew/bin/git
+if command -v pyenv &> /dev/null; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # --- rust ---
 . "$HOME/.cargo/env"
@@ -23,39 +36,72 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/go/bin
 
 
-#--- webstorm ---
-export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
-
-# --- fzf ---
-source <(fzf --zsh)
-
-# --- fnm ---
-eval "$(fnm env --use-on-cd)"
-
-# --- eza ---
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
-  compinit
+# --- webstorm (macOS only) ---
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+  export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
 fi
 
+# --- fzf ---
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
+
+# --- fnm ---
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
+# --- eza completion ---
+if [[ "$OS_TYPE" == "Darwin" ]] && type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+elif [[ "$OS_TYPE" == "Linux" ]]; then
+  # Linux package managers typically install to standard locations
+  FPATH="/usr/share/zsh/site-functions:${FPATH}"
+fi
+autoload -Uz compinit
+compinit
+
 # --- zoxide ---
-eval "$(zoxide init zsh --cmd cd)"
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh --cmd cd)"
+fi
 
 # --- direnv ---
-eval "$(direnv hook zsh)"
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 # --- starship ---
-eval "$(starship init zsh)"
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
 
 # --- zsh vim mode ---
 bindkey -v
 
 # --- zsh autosuggestions ---
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ "$OS_TYPE" == "Darwin" ]] && [[ -n "$BREW_PREFIX" ]]; then
+  source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+elif [[ "$OS_TYPE" == "Linux" ]]; then
+  # Try common Linux installation paths
+  for plugin_path in \
+    /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+    /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh; do
+    [[ -f "$plugin_path" ]] && source "$plugin_path" && break
+  done
+fi
 
 # --- zsh syntax highlighting ---
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ "$OS_TYPE" == "Darwin" ]] && [[ -n "$BREW_PREFIX" ]]; then
+  source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+elif [[ "$OS_TYPE" == "Linux" ]]; then
+  # Try common Linux installation paths
+  for plugin_path in \
+    /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+    /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; do
+    [[ -f "$plugin_path" ]] && source "$plugin_path" && break
+  done
+fi
 
 # --- zsh plugins ---
 source $XDG_CONFIG_HOME/zsh/git.zsh
@@ -133,9 +179,8 @@ if [ -f ~/.config/zsh/.zshrc.local ]; then
 fi
 
 
-# bun completions
-[ -s "/Users/mark-omarov/.bun/_bun" ] && source "/Users/mark-omarov/.bun/_bun"
-
-# bun
+# --- bun ---
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+# bun completions (portable - no hardcoded username)
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
