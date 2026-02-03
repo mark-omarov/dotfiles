@@ -17,4 +17,32 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
   { import = "astrocommunity.file-explorer.yazi-nvim" },
+  { import = "astrocommunity.editing-support.refactoring-nvim" },
+
+  -- Search & replace across project
+  { import = "astrocommunity.search.grug-far-nvim" },
+
+  -- Test runner
+  { import = "astrocommunity.test.neotest" },
+
+  -- Docker
+  { import = "astrocommunity.pack.docker" },
+  { import = "astrocommunity.docker.lazydocker" },
+
+  -- K8s / YAML support
+  { import = "astrocommunity.pack.helm" },
+  { import = "astrocommunity.pack.yaml" },
+
+  -- Task runner (run configs)
+  { import = "astrocommunity.code-runner.overseer-nvim" },
+
+  -- Diagnostics
+  { import = "astrocommunity.diagnostics.trouble-nvim" },
+
+  -- Surround
+  { import = "astrocommunity.motion.mini-surround" },
+
+  -- LSP enhancements
+  { import = "astrocommunity.lsp.inc-rename-nvim" },
+  { import = "astrocommunity.lsp.actions-preview-nvim" },
 }

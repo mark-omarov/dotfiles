@@ -125,3 +125,108 @@ Set the Obsidian vault path for nvim Obsidian keymaps:
 ```bash
 export OBSIDIAN_VAULT="$HOME/path/to/vault"
 ```
+
+## Refactoring (`<Leader>r`)
+
+Keymaps provided by AstroCommunity `refactoring-nvim` pack. Check `<Leader>r` in which-key for the full list.
+
+LSP code actions (`<Leader>la`) provide language-specific refactors (e.g. TS move to file).
+
+## Testing — neotest (`<Leader>T`)
+
+Keymaps provided by AstroCommunity `neotest` pack. Check `<Leader>T` in which-key for the full list.
+
+## Database — DBee (`<Leader>D`)
+
+| Key          | Action                                   |
+| ------------ | ---------------------------------------- |
+| `<Leader>D`  | Open DBee (modern UI with result tables) |
+
+Supports Postgres, MySQL, SQLite, MongoDB, Redis, etc. Connections are configured in the DBee UI.
+
+## HTTP Client — kulala (`<Leader>H`)
+
+Create `.http` files (IntelliJ HTTP Client format). Requires `curl`.
+
+| Key          | Action                    |
+| ------------ | ------------------------- |
+| `<Leader>Hs` | Send request under cursor |
+| `<Leader>Ha` | Send all requests in file |
+| `<Leader>Hn` | Jump to next request      |
+| `<Leader>Hp` | Jump to previous request  |
+
+## Task Runner — overseer (`<Leader>M`)
+
+Uses the AstroCommunity default keybindings under `<Leader>M`.
+
+| Key          | Action                        |
+| ------------ | ----------------------------- |
+| `<Leader>Mr` | Run a task (select from list) |
+| `<Leader>Mt` | Toggle task panel             |
+| `<Leader>Ml` | Restart last task             |
+
+Supports VS Code `tasks.json`, make, npm scripts, and custom commands.
+
+## Infrastructure (`<Leader>I`)
+
+| Key          | Action                                   |
+| ------------ | ---------------------------------------- |
+| `<Leader>Ik` | Open k9s in floating terminal            |
+| `<Leader>Id` | Open lazydocker in floating terminal     |
+
+External deps: `brew install lazydocker derailed/k9s/k9s`
+
+## Search & Replace — grug-far (`<Leader>s`)
+
+| Key                    | Action                         |
+| ---------------------- | ------------------------------ |
+| `<Leader>ss`           | Search/Replace workspace       |
+| `<Leader>se`           | Search/Replace by filetype     |
+| `<Leader>sf`           | Search/Replace in current file |
+| `<Leader>sw`           | Replace word under cursor      |
+| Visual + `<Leader>s`   | Replace selection              |
+
+Ripgrep powered, supports regex and file filtering.
+
+## Diagnostics — trouble.nvim (`<Leader>x`)
+
+| Key          | Action                              |
+| ------------ | ----------------------------------- |
+| `<Leader>xx` | Toggle diagnostics list             |
+| `<Leader>xX` | Toggle buffer diagnostics           |
+| `<Leader>xs` | Toggle symbols outline              |
+| `<Leader>xl` | Toggle location list                |
+| `<Leader>xq` | Toggle quickfix list                |
+
+Check `<Leader>x` in which-key for the full list — trouble.nvim enhances the default quickfix/diagnostics group.
+
+## Surround — mini.surround (`gz`)
+
+Prefix is `gz` (to avoid conflict with vim's built-in `s`).
+
+| Key    | Action                                            |
+| ------ | ------------------------------------------------- |
+| `gza`  | Add surrounding (e.g. `gzaiw"` wraps word in `"`) |
+| `gzd`  | Delete surrounding (e.g. `gzd"` removes `"`)      |
+| `gzr`  | Replace surrounding (e.g. `gzr"'` changes `"` to `'`) |
+| `gzf`  | Find surrounding (jump forward)                   |
+| `gzF`  | Find surrounding (jump backward)                  |
+| `gzh`  | Highlight surrounding                             |
+
+Works in normal and visual mode. Supports `()`, `[]`, `{}`, `""`, `''`, `` ` ``, HTML tags, and more.
+
+## LSP Enhancements
+
+| Feature           | What it does                                              |
+| ----------------- | --------------------------------------------------------- |
+| `inc-rename`      | Inline rename with live preview (replaces rename prompt)  |
+| `actions-preview` | Shows diff preview before applying code actions           |
+
+## Already built-in (AstroNvim defaults)
+
+| Feature         | Keys                                         |
+| --------------- | -------------------------------------------- |
+| TODO comments   | `]t`/`[t` jump, `:TodoLocList` to list all   |
+| Git blame       | `<Leader>gl` line blame                      |
+| Marks/bookmarks | `ma` set mark a, `'a` jump, `:marks` list   |
+| Terminal        | `<Leader>tf` float, `<Leader>th` horizontal, `<F7>` toggle |
