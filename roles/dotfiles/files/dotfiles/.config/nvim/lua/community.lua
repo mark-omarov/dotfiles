@@ -8,10 +8,12 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
-  -- import/override with your plugins folder
-  { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
   { import = "astrocommunity.color.transparent-nvim" },
   { import = "astrocommunity.completion.cmp-cmdline" },
+  { import = "astrocommunity.pack.go" },
+  { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
 }
