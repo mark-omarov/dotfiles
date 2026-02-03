@@ -74,6 +74,27 @@ You start in **insert mode** (normal typing). Press `Esc` to enter **normal mode
 | `lg`             | Lazygit (with cd-on-exit)                       |
 | `y`              | Yazi file manager (with cd-on-exit)             |
 
+## Obsidian (nvim)
+
+Requires `OBSIDIAN_VAULT` env var (see [Sessionizer](#sessionizer) config). Keymaps appear under `<Leader>O` in which-key.
+
+| Key          | Action       |
+| ------------ | ------------ |
+| `<Leader>Oo` | Open note    |
+| `<Leader>On` | New note     |
+| `<Leader>Od` | Daily note   |
+| `<Leader>Os` | Search notes |
+| `<Leader>Ob` | Backlinks    |
+| `<Leader>Ot` | Tags         |
+
+## Markdown plugins
+
+| Plugin                   | What it does                                            |
+| ------------------------ | ------------------------------------------------------- |
+| `render-markdown.nvim`   | Auto-renders headings, code blocks, and lists in-buffer |
+| `:RenderMarkdown toggle` | Toggle render-markdown on/off                           |
+| `marksman` LSP           | Markdown link completions, go-to-definition, etc.       |
+
 ## Sessionizer
 
 `Ctrl-f` auto-discovers git repos in `~/workspace` and standalone repos in `~` (like dotfiles).
@@ -82,4 +103,10 @@ Override search paths per machine in `~/.config/zsh/.zshrc.local`:
 
 ```bash
 export SESSIONIZER_DIRS="$HOME/workspace $HOME/work-projects"
+```
+
+Set the Obsidian vault path for nvim Obsidian keymaps:
+
+```bash
+export OBSIDIAN_VAULT="$HOME/path/to/vault"
 ```
