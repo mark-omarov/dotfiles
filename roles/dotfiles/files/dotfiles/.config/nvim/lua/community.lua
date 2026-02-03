@@ -16,4 +16,5 @@ return {
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
+  { import = "astrocommunity.file-explorer.yazi-nvim" },
 }
