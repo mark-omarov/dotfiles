@@ -50,6 +50,8 @@ eval "$(starship init zsh)"
 
 # --- zsh vim mode ---
 bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
 
 # --- zsh autosuggestions ---
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -112,7 +114,7 @@ function run_txs() {
 zle -N run_txs
 bindkey '^F' run_txs
 
-# --- lvim (requires lvim setup) ---
+# --- editor ---
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 alias vv=$EDITOR

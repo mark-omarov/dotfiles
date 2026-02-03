@@ -13,6 +13,7 @@ dotfiles/.config/*
 !dotfiles/.config/graphite
 !dotfiles/.config/lazygit
 !dotfiles/.config/neofetch
+!dotfiles/.config/nvim
 !dotfiles/.config/wezterm
 !dotfiles/.config/yazi
 !dotfiles/.config/zsh
