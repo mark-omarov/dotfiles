@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Directories to search for projects (override in .zshrc.local)
+: ${SESSIONIZER_DIRS:="$HOME/workspace"}
+
 switch_to() {
   local session_name="$1"
   if [[ -z $TMUX ]]; then
@@ -24,17 +27,25 @@ hydrate() {
 }
 
 selected="$(
-  find "$@" -mindepth 1 -maxdepth 1 -type d 2>/dev/null \
-  | fzf \
-      --prompt='Select a directory> ' \
-      --preview '
-        session_name="$(basename {} | tr . _)"
-        if tmux has-session -t "$session_name" 2>/dev/null; then
-          tmux capture-pane -ept "$session_name" 2>/dev/null
-        else
-          echo "No session found for $session_name"
-        fi
-      '
+  {
+    # standalone repos in home (dotfiles, etc.)
+    find ~ -mindepth 2 -maxdepth 2 -name .git -type d 2>/dev/null
+    # project repos in workspace dirs
+    for dir in ${=SESSIONIZER_DIRS}; do
+      find "$dir" -maxdepth 4 -name .git -type d 2>/dev/null
+    done
+  } | sed 's/\/\.git$//' \
+    | sort -u \
+    | fzf \
+        --prompt='Select a project> ' \
+        --preview '
+          session_name="$(basename {} | tr . _)"
+          if tmux has-session -t "$session_name" 2>/dev/null; then
+            tmux capture-pane -ept "$session_name" 2>/dev/null
+          else
+            echo "No session found for $session_name"
+          fi
+        '
 )"
 
 [[ -z $selected ]] && exit 0

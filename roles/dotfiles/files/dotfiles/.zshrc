@@ -108,7 +108,7 @@ fi
 
 # --- tmux sessionizer ---
 function run_txs() {
-  ~/.config/zsh/tmux-sessionizer ~/ ~/workspace/*/* ~/repos
+  ~/.config/zsh/tmux-sessionizer
 }
 
 zle -N run_txs
@@ -117,7 +117,7 @@ bindkey '^F' run_txs
 # --- editor ---
 export EDITOR="nvim"
 export VISUAL=$EDITOR
-alias vv=$EDITOR
+alias v=$EDITOR
 
 # --- yazi ---
 function y() {
