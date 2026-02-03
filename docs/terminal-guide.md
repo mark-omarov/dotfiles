@@ -95,6 +95,21 @@ Requires `OBSIDIAN_VAULT` env var (see [Sessionizer](#sessionizer) config). Keym
 | `:RenderMarkdown toggle` | Toggle render-markdown on/off                           |
 | `marksman` LSP           | Markdown link completions, go-to-definition, etc.       |
 
+## Neovim Dashboard
+
+The dashboard (shown on startup) uses `snacks.nvim` with a two-pane layout. The right pane shows GitHub notifications, issues, PRs, and git diff stats.
+
+### Dependencies
+
+```bash
+# GitHub CLI (required for right pane)
+brew install gh
+gh auth login
+
+# GitHub notifications on dashboard
+gh extension install meiji163/gh-notify
+```
+
 ## Sessionizer
 
 `Ctrl-f` auto-discovers git repos in `~/workspace` and standalone repos in `~` (like dotfiles).
