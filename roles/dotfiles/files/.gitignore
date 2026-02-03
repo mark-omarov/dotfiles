@@ -2,15 +2,18 @@ secrets/
 
 dotfiles/.ssh/*
 !dotfiles/.ssh/config
-!dotfiles/.ssh/*.pub
+!dotfiles/.ssh/id_ed25519.pub
 
 dotfiles/.gnupg/*
 !dotfiles/.gnupg/common.conf
 !dotfiles/.gnupg/gpg-agent.conf
 !dotfiles/.gnupg/public-keys.d/
 
-dotfiles/.config/gh/
-dotfiles/.config/github-copilot/
-dotfiles/.config/raycast/
-dotfiles/.config/zsh/.zshrc.local
-dotfiles/.config/karabiner/
+dotfiles/.config/*
+!dotfiles/.config/graphite
+!dotfiles/.config/lazygit
+!dotfiles/.config/neofetch
+!dotfiles/.config/wezterm
+!dotfiles/.config/yazi
+!dotfiles/.config/zsh
+!dotfiles/.config/starship.toml
