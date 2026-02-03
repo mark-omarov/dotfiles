@@ -12,6 +12,12 @@ return {
       "BufNewFile " .. vault .. "/**.md",
     },
     cmd = { "Obsidian" },
+    init = function()
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = vault .. "/**.md",
+        callback = function() vim.opt_local.conceallevel = 2 end,
+      })
+    end,
     opts = {
       workspaces = {
         { name = "vault", path = vault },
@@ -23,6 +29,10 @@ return {
         folder = "templates",
       },
       legacy_commands = false,
+      ui = {
+        checkboxes = {},
+        external = { enable = true },
+      },
     },
   },
   {
