@@ -176,6 +176,20 @@ Supports VS Code `tasks.json`, make, npm scripts, and custom commands.
 
 External deps: `brew install lazydocker derailed/k9s/k9s`
 
+## Git Worktrees (`<Leader>gw`)
+
+Manage git worktrees without leaving nvim. Uses Snacks picker for selection. When switching, nvim changes its cwd and remaps open buffers to the target worktree.
+
+| Key          | Action                                 |
+| ------------ | -------------------------------------- |
+| `<Leader>gws` | Switch to a worktree (picker)         |
+| `<Leader>gwn` | Create a new worktree (picker)        |
+| `<Leader>gwr` | Remove a worktree (picker)            |
+
+Commands are also available via `:GitWorktreeCreate`, `:GitWorktreeSwitch`, `:GitWorktreeRemove`, and `:GitWorktreeCreateExisting` (for an existing branch).
+
+**Note:** Requires the repo to be a bare clone or have worktrees set up. Ensure upstream fetch is configured: `git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"`.
+
 ## Search & Replace — grug-far (`<Leader>s`)
 
 | Key                    | Action                         |
