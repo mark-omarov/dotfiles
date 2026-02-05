@@ -34,7 +34,12 @@ selected="$(
     for dir in ${=SESSIONIZER_DIRS}; do
       find "$dir" -maxdepth 4 -name .git -type d 2>/dev/null
     done
-  } | sed 's/\/\.git$//' \
+    # non-git directories with .session.tmux-sessionizer marker
+    find ~ -mindepth 2 -maxdepth 2 -name .session.tmux-sessionizer -type f 2>/dev/null
+    for dir in ${=SESSIONIZER_DIRS}; do
+      find "$dir" -maxdepth 4 -name .session.tmux-sessionizer -type f 2>/dev/null
+    done
+  } | sed -e 's/\/\.git$//' -e 's/\/\.session\.tmux-sessionizer$//' \
     | sort -u \
     | fzf \
         --prompt='Select a project> ' \
