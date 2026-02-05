@@ -5,7 +5,20 @@ return {
       mappings = {
         n = {
           -- Database
-          ["<Leader>D"] = { "<Cmd>Dbee<CR>", desc = "Database" },
+          ["<Leader>D"] = { desc = "Database" },
+          ["<Leader>Do"] = { "<Cmd>Dbee<CR>", desc = "Open" },
+          ["<Leader>Dp"] = {
+            function()
+              local dbee = require("dbee")
+              if not dbee.is_open() then
+                dbee.open()
+              end
+              if _G.DbeeLayout then
+                _G.DbeeLayout:open_popup()
+              end
+            end,
+            desc = "Popup (drawer/log)",
+          },
 
           -- Infrastructure
           ["<Leader>I"] = { desc = "Infrastructure" },
