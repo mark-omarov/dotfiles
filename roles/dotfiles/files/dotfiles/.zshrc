@@ -39,9 +39,6 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# --- zoxide ---
-eval "$(zoxide init zsh --cmd cd)"
-
 # --- direnv ---
 eval "$(direnv hook zsh)"
 
@@ -141,3 +138,6 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# --- zoxide ---
+eval "$(zoxide init zsh --cmd cd)"
