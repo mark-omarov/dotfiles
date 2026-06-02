@@ -141,3 +141,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # --- zoxide ---
 eval "$(zoxide init zsh --cmd cd)"
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/mark/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# opencode
+export PATH=/Users/mark/.opencode/bin:$PATH

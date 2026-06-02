@@ -20,4 +20,10 @@ config.colors = {
 config.window_background_opacity = 0.75
 config.macos_window_background_blur = 10
 
+-- Shift+Enter → ESC+CR so TUIs (Claude Code) can distinguish from plain Enter
+-- without needing tmux extended-keys (which mangles paste in nvim).
+config.keys = {
+  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b\r") },
+}
+
 return config
