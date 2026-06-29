@@ -2,6 +2,10 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    -- Inline image support probes the terminal with escape sequences on first
+    -- image preview; inside tmux the responses can leak into the input queue
+    -- as keystrokes (Esc closes pickers, trailing "\" triggers :split).
+    image = { enabled = false },
     dashboard = {
       preset = {
         header = table.concat({
