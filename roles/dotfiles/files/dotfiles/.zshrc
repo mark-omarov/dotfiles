@@ -93,7 +93,7 @@ lg() {
 }
 
 # --- tmux ---
-if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" && "$TERM_PROGRAM" != "vscode" ]]; then
+if [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "Orca" ]]; then
   if [ -z "$TMUX" ]; then
     if tmux has-session -t default 2>/dev/null; then
       tmux attach-session -t default
