@@ -1,0 +1,8 @@
+# Repo files, not dotfiles
+README.md
+LICENSE
+.github/
+.editorconfig
+
+# Machine state: symlink into ~/.local/state/omarchy, changes with the theme
+.config/nvim/lua/plugins/theme.lua

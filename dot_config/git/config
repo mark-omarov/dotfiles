@@ -1,0 +1,39 @@
+# See https://git-scm.com/docs/git-config
+
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[init]
+	defaultBranch = master
+[pull]
+	rebase = true 			 # Rebase (instead of merge) on pull
+[push]
+	autoSetupRemote = true   # Automatically set upstream branch on push
+[diff]
+	algorithm = histogram    # Clearer diffs on moved/edited lines
+	colorMoved = plain       # Highlight moved blocks in diffs
+	mnemonicPrefix = true    # More intuitive refs in diff output
+[commit]
+	verbose = true           # Include diff comment in commit message template
+	gpgsign = true
+[column]
+	ui = auto 			     # Output in columns when possible
+[branch]
+	sort = -committerdate    # Sort branches by most recent commit first
+[tag]
+	sort = -version:refname  # Sort version numbers as you would expect
+	gpgsign = true
+[rerere]
+	enabled = true           # Record and reuse conflict resolutions
+	autoupdate = true        # Apply stored conflict resolutions automatically
+[user]
+	name = Mark Omarov
+	email = 15357910+mark-omarov@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIWzO9+TbNJpJaT6O9qf+0+PEjkobmikzr0TlG/UkG2b
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /home/mark/.config/git/allowed_signers
+	revocationFile = /home/mark/.config/git/revoked_signers

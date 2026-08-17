@@ -1,0 +1,5 @@
+# Session-wide environment for the graphical session.
+
+# Route SSH auth through the 1Password agent, for GUI apps and for tools
+# like ssh-keygen (git commit signing) that don't read ~/.ssh/config.
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
