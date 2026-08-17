@@ -1,6 +1,6 @@
 # dotfiles
 
-Managed with [chezmoi](https://www.chezmoi.io/). Targets [Omarchy](https://omarchy.org).
+My [Omarchy](https://omarchy.org) setup, managed with [chezmoi](https://www.chezmoi.io/).
 
 Secrets live in 1Password and are read at apply time. Nothing sensitive is committed.
 
@@ -11,17 +11,23 @@ omarchy pkg add chezmoi
 chezmoi init --apply --source ~/Work/github.com/mark-omarov/dotfiles mark-omarov
 ```
 
-`--source` keeps the repo in the normal checkout location instead of chezmoi's default.
+`--source` keeps the repo in my normal checkout location instead of chezmoi's default.
 
 ## What's tracked
 
-Only files that differ from Omarchy's shipped defaults, plus `~/.config/nvim`
-(LazyVim, seeded from `/etc/skel` and never updated in place).
+Only what differs from Omarchy's shipped defaults. Unmodified defaults are left
+alone on purpose, so upstream improvements keep arriving instead of being pinned
+to whatever I copied once. To restore one:
 
-Unmodified Omarchy defaults are deliberately left alone, so upstream
-improvements keep arriving. Run `omarchy-refresh-config <path>` to restore one.
+```sh
+omarchy-refresh-config hypr/monitors.lua
+```
+
+`~/.config/nvim` is the exception. Omarchy seeds it from `/etc/skel` when the
+account is created and never touches it again, so there is no upstream to drift
+from and the whole directory is tracked.
 
 ## Branches
 
-- `main` — Omarchy (current)
-- `macos` — the previous Ansible + stow setup, kept for reference
+- `main` — Omarchy
+- `macos` — the previous Ansible and stow setup, kept for reference
