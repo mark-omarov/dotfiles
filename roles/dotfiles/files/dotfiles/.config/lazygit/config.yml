@@ -1,5 +1,0 @@
-notARepository: skip
-os:
-  editPreset: "nvim-remote"
-git:
-  overrideGpg: true

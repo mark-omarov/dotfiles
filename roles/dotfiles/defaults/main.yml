@@ -1,3 +1,0 @@
-dotfiles_secrets:
-  - src: "{{ role_path }}/files/secrets/id_ed25519.enc"
-    dest: "{{ role_path }}/files/dotfiles/.ssh/id_ed25519"
