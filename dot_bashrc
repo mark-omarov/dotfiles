@@ -15,19 +15,3 @@ source "$OMARCHY_PATH/default/bash/rc"
 
 # 1Password SSH agent (also set session-wide in ~/.config/uwsm/default)
 export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
-
-# Carried over from the macOS dotfiles
-alias ll='eza -lh --group-directories-first --icons=auto'
-alias la='eza -a --group-directories-first --icons=auto'
-alias lla='eza -lha --group-directories-first --icons=auto'
-alias v='nvim'
-
-# lazygit, but cd to wherever I ended up
-lg() {
-  export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
-  lazygit "$@"
-  if [ -f "$LAZYGIT_NEW_DIR_FILE" ]; then
-    cd "$(cat "$LAZYGIT_NEW_DIR_FILE")" || return
-    rm -f "$LAZYGIT_NEW_DIR_FILE"
-  fi
-}
