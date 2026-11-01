@@ -143,3 +143,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(zoxide init zsh --cmd cd)"
 
 
+export OPENCODE_DISABLE_CLAUDE_CODE_SKILLS=1
